@@ -37,16 +37,23 @@
         font-size: 40px;
     }
     & p {
-        color: utilities.$text-color;
-        font-size: 20px;
+        margin-top:10px;
     }
 }
 .signin_txt{
 }
 .sigin_button{
     width:100%;
-    margin-top:50px;
+    margin-top:30px;
+    button {
+        background:utilities.$secondary_color
+    }
 }
-.forget_password {
-    color:blue;
+.forget_password p{
+    color:#39CDCC;
+    font-size: 12px;
+    ;
+}
+.password_box{
+    height:4px;
 }
