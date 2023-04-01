@@ -11,9 +11,10 @@ const [signinObj,setSigninObj] = useState({
 email:"",
 password:""
 })
-const [disableButton,setDisableButton] = useState(false)
+const [disableButton,setDisableButton] = useState(true)
 const [errorTable,setErrorTable] = useState<Array<string>>([])
 const [passwordIndicator,setPasswordIndicator] = useState("empty")
+const [passwordType,setPasswordType] = useState(true)
 
 const handleInput = (name:string,value:string) => {
   setErrorTable([])
@@ -24,9 +25,10 @@ const handleInput = (name:string,value:string) => {
         }
     })
     if(name==="password"){
-        confirmPassword(value)
+       const password = confirmPassword(value)
+        setPasswordIndicator(password)
     }
-    if(errorTable.length=== 0){
+    if(errorTable.length=== 0 && passwordIndicator==="strong"|| passwordIndicator==="medium"){
       setDisableButton(false)
     }else{
       setDisableButton(true)
@@ -58,9 +60,8 @@ const colorbackground = passwordIndicator ==="weak" ? "red": passwordIndicator==
             </div>
           
           <div className="custom_input" > 
-        <label htmlFor="email">Email</label>
         <CustomInput
-        placeholder='Enter your email'
+        placeholder='Email'
         type="email"
         name="email"
         isError={errorTable.includes("email")}
@@ -69,13 +70,13 @@ const colorbackground = passwordIndicator ==="weak" ? "red": passwordIndicator==
         value={signinObj.email}
         changeInput={(value,name)=>handleInput(name,value)}
         errors={["required"]}
+        showPassword={()=>{}}
         />
         </div>
         <div className="custom_input"  >
-        <label>Password</label>
         <CustomInput
-        placeholder='****'
-        type="password"
+        placeholder='password'
+        type={passwordType ?"password":"string"}
         isError={errorTable.includes("password") || errorTable.includes("passLength") && true}
         error ={errorTable.includes("password") ? "Please enter a password" : errorTable.includes("passLength") ? "length is less than 8": ""}
         name="password"
@@ -83,15 +84,17 @@ const colorbackground = passwordIndicator ==="weak" ? "red": passwordIndicator==
         value={signinObj.password}
         changeInput={(value,name)=>handleInput(name,value)}
         errors={["required","password"]}
+        sideText={passwordType ? "SHOW" :"HIDE"}
+        showPassword={()=>setPasswordType(!passwordType)}
         />
        <PasswordIndicator strength={passwordIndicator} colorbackground={colorbackground} />
         </div>
         <div className="forget_password">
-          <p>Forget password</p>
+          <p>FORGOT PASSW0RD?</p>
         </div>
         <div className="sigin_button">
-          <CustomButton onClick={signIn}>
-            Sign in
+          <CustomButton onClick={signIn} disabled={disableButton}>
+            LOG IN
           </CustomButton>
         </div>
           </div>

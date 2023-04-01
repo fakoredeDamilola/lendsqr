@@ -6,9 +6,9 @@ const Logo = ({text}:{text:boolean}) => {
   return (
     <div className='logo'>
         <img src="/logo.svg" /> 
-        {text && <div>
+        {text && <h1>
             lendsqr
-        </div>}
+        </h1>}
     </div>
   )
 }

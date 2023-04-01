@@ -13,9 +13,11 @@ interface ICustomInput {
     setErrorTable?:React.Dispatch<React.SetStateAction<string[]>>
     errors?:string[];
     disable?:boolean;
+    sideText?:string;
+    showPassword:()=>void
 }
 
-const CustomInput = ({name,value, error,errors,setErrorTable,disable,changeInput,placeholder,type,isError}:ICustomInput) => {
+const CustomInput = ({name,value, error,errors,setErrorTable,disable,changeInput,placeholder,type,isError,sideText,showPassword}:ICustomInput) => {
   return (
     <div className='custom_input'>
     <input
@@ -47,6 +49,9 @@ const CustomInput = ({name,value, error,errors,setErrorTable,disable,changeInput
     }
   }}
   />
+ {sideText && <div className="input_side_text" onClick={showPassword}>
+    {sideText}
+  </div>}
   {isError && <div style={{color:"red",fontSize:"12px"}}>
 {error ?? "This input is wrong"}
   </div> }
