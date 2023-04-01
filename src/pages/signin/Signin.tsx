@@ -4,6 +4,7 @@ import Logo from "../../components/Logo"
 import PasswordIndicator from "../../components/PasswordIndicator"
 import "../../styles/signin.scss"
 import { confirmPassword } from "../../utils/utilFunction"
+import CustomButton from "../../components/custom/CustomButton"
 
 const Signin = () => {
 const [signinObj,setSigninObj] = useState({
@@ -32,6 +33,9 @@ const handleInput = (name:string,value:string) => {
     }
 }
 
+const signIn = () => {
+  console.log(12)
+}
 
 const colorbackground = passwordIndicator ==="weak" ? "red": passwordIndicator==="medium" ? "orange" : "green"
 
@@ -48,8 +52,11 @@ const colorbackground = passwordIndicator ==="weak" ? "red": passwordIndicator==
             
           </div>
           <div className="signin_text">
-          <h1>Welcome!</h1>
+            <div className="signin_txt">
+            <h1>Welcome!</h1>
           <p>Enter details to login.</p>
+            </div>
+          
           <div className="custom_input" > 
         <label htmlFor="email">Email</label>
         <CustomInput
@@ -78,6 +85,14 @@ const colorbackground = passwordIndicator ==="weak" ? "red": passwordIndicator==
         errors={["required","password"]}
         />
        <PasswordIndicator strength={passwordIndicator} colorbackground={colorbackground} />
+        </div>
+        <div className="forget_password">
+          <p>Forget password</p>
+        </div>
+        <div className="sigin_button">
+          <CustomButton onClick={signIn}>
+            Sign in
+          </CustomButton>
         </div>
           </div>
       </div>
