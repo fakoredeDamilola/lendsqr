@@ -1,4 +1,5 @@
 import "../styles/components.scss"
+import {MdArrowDropDown} from "react-icons/md"
 
 const ProfileTab = () => {
   return (
@@ -11,7 +12,7 @@ const ProfileTab = () => {
             Damilola
         </div>
         <div className="profile_img_dropdown_icon">
-            Da
+            <MdArrowDropDown />
         </div>
        </div>
     </div>
