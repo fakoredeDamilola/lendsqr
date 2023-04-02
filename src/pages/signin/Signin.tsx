@@ -70,7 +70,6 @@ const colorbackground = passwordIndicator ==="weak" ? "red": passwordIndicator==
         value={signinObj.email}
         changeInput={(value,name)=>handleInput(name,value)}
         errors={["required"]}
-        showPassword={()=>{}}
         />
         </div>
         <div className="custom_input"  >
@@ -84,9 +83,12 @@ const colorbackground = passwordIndicator ==="weak" ? "red": passwordIndicator==
         value={signinObj.password}
         changeInput={(value,name)=>handleInput(name,value)}
         errors={["required","password"]}
-        sideText={passwordType ? "SHOW" :"HIDE"}
-        showPassword={()=>setPasswordType(!passwordType)}
-        />
+        >
+          <div className="input_side_text" onClick={()=>setPasswordType(!passwordType)}>
+              
+          {passwordType ? "SHOW" :"HIDE"}
+            </div>
+          </CustomInput>
        <PasswordIndicator strength={passwordIndicator} colorbackground={colorbackground} />
         </div>
         <div className="forget_password">
