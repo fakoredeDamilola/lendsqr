@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom"
 import "../styles/components.scss"
-import { linkLists } from "../utils/linkList"
+import { IChild, ILinks, linkLists } from "../utils/linkList"
 
 const SideNav = () => {
   return (
     <div className="sidenav">
-      <h2>Scrollable Sidebar</h2>
-     {linkLists.map((list:any,index)=>{
-      console.log({list})
+     {linkLists.map((list:ILinks,index:number)=>{
       return (
-        <ul className="sidebar_list_parent">
-          {list.parent}
-         {list.children.map((child:any,index:number)=>{
+        <ul className="sidebar_list" key={index}>
+          <li className="sidebar_list_parent">{list.parent}</li>
+         {list.children.map((child:IChild,index:number)=>{
           return (
-            <li>
-              <Link to ={`/${child.link}`}>{child.name}</Link></li>
+            <li key={index} className="sidebar_list_child">
+              <Link className="li_link" to ={`/${child.link}`}>
+                <div>{child.icon}</div>
+                 <p>{child.name}</p></Link></li>
           )
          })
 
