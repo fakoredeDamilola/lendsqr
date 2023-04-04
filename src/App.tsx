@@ -28,7 +28,7 @@ const {loading,authenticated} = useLogin()
                 );
               })}
 
-              {!loading ?
+              {
                 authRoutes.map((route: AppRoutes, i: number) => {
                   const { component: Component, path, exact } = route;
                   return (
@@ -43,7 +43,7 @@ const {loading,authenticated} = useLogin()
                     />
                   );
                 })
-                : null}
+                }
             </Routes>
         </AppWrapper>
       </Router>

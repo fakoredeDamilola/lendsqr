@@ -11,10 +11,12 @@ export default function PrivateRoute({
 }) {
     let auth = localStorage.getItem("authToken");
 
-  if(!auth){
+  if(true){
     // Redirect them to the /unauthorized page, but save the current location they were
     // trying to go to when they were redirected.
-    return <Navigate to='/unauthorized' state={{ from: location }} replace />;
+    return <Navigate to='/unauthorized'
+    // state={{ from: location }} replace
+    />;
   }
 
  
