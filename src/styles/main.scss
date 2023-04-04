@@ -3,6 +3,7 @@
 * {
     margin:0;
     padding:0;
+    box-sizing: border-box;
 }
 @font-face {
     font-family: 'Avenir Regular';
@@ -17,6 +18,22 @@
 // USAGE
 h1,h2,h3,h4,h5 {
     font-family: 'Avenir Bold', sans-serif;
+ color: utilities.$primary-color;
+}
+h1 {
+    font-size: 40px;
+}
+h2{
+    font-size: 24px;
+}
+h3{
+    font-size: 22px;
+}
+h4{
+    font-size: 16px;
+}
+h6{
+    font-size: 12px;
 }
 body{
     font-family: 'Avenir Regular', sans-serif;
@@ -25,4 +42,14 @@ body{
 p{
     font-size: 20px;
     color: utilities.$text-color;
+}
+
+section{
+    margin:35px 0;
+}
+.children {
+    margin-left: 283px;
+    padding: 50px 20px;
+    width: calc(100% - 283px);
+    background: #FBFBFB;
 }

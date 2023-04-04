@@ -55,6 +55,9 @@ const colorbackground = passwordIndicator ==="weak" ? "red": passwordIndicator==
           </div>
           <div className="signin_text">
             <div className="signin_txt">
+              <div className="mobile_logo">
+              <Logo text={true} />
+              </div>
             <h1>Welcome!</h1>
           <p>Enter details to login.</p>
             </div>

@@ -1,17 +1,19 @@
 import {HiUsers} from "react-icons/hi"
-import {FaUsers,FaHandshake,FaUserTimes,FaUserCheck,FaSuitcase,FaScroll} from "react-icons/fa"
+import {FaUsers,FaHandshake,FaUserTimes,FaUserCheck,FaSuitcase,FaScroll, FaHome} from "react-icons/fa"
 import {TbMoneybag,TbPigMoney} from "react-icons/tb"
-import {GiReceiveMoney,GiOilySpiral} from "react-icons/gi"
+import {GiReceiveMoney,GiOilySpiral, GiCartwheel, GiSuitcase} from "react-icons/gi"
 import {GrMoney,GrUserSettings} from "react-icons/gr"
 import {VscArrowSwap} from "react-icons/vsc"
 import {IoDocumentTextSharp} from "react-icons/io5"
 import {AiOutlineBarChart} from "react-icons/ai"
+import {RxBarChart} from "react-icons/rx"
 
 
 export interface IChild {
     name:string;
     icon:any;
-    link:string
+    link:string;
+    org?:{name:string,value:string}[]
 }
 
 export interface ILinks {
@@ -26,7 +28,7 @@ const linkLists:ILinks[] = [
         parent:"CUSTOMERS",
         parentIcon:"",
         children:[
-            {name:"Users",icon:<HiUsers />,link:"FaUserCheck#"},
+            {name:"Users",icon:<HiUsers />,link:"dashboard"},
             {name:"Guarantors",icon:<FaUsers />,link:"#"},
             {name:"Loans",icon:<TbMoneybag />,link:"#"},
             {name:"Decision Models",icon:<FaHandshake />,link:"#"},
@@ -55,12 +57,25 @@ const linkLists:ILinks[] = [
         parent:"SETTINGS",
         parentIcon:"",
         children:[
-            {name:"Prefences",icon:"",link:"#"},
-            {name:"Fees and Pricing",icon:"",link:"#"},
+            {name:"Preferences",icon:<RxBarChart />,link:"#"},
+            {name:"Fees and Pricing",icon:<GiCartwheel />,link:"#"},
             {name:"Audit Logs",icon:<IoDocumentTextSharp />,link:"#"},
+            {name:"Systems Messages",icon:<IoDocumentTextSharp />,link:"#"},
         ]
     }
 ]
 
+const fastLinks = [
+    {name:"Dashboard",icon:<FaHome />,link:"/dashboard"}
+]
 
-export {linkLists}
+const dropdownLinks:IChild[] = [
+    {name:"Switch Organization", icon:<GiSuitcase />,link:"/",org:[
+        {name:"org1",value:"org1"},
+        {name:"org2",value:"org2"},
+        {name:"org3",value:"org3"},
+        {name:"org4",value:"org4"},
+    ]}
+]
+
+export {linkLists,fastLinks,dropdownLinks}

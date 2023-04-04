@@ -21,7 +21,7 @@
 .signin_img{
     width:50%;
     background-color: #ffffff64;
-    display:flex;
+    display:none;
     flex-direction: column;
     justify-content: center;
     box-sizing: border-box;
@@ -30,12 +30,9 @@
     display:flex;
     flex-direction: column;
     justify-content: center;
-    width:80%;
+    align-items: center;
+    width:100%;
     padding:0 80px;
-    & h1 {
-        color: utilities.$primary-color;
-        font-size: 40px;
-    }
     & p {
         margin-top:10px;
     }
@@ -46,14 +43,48 @@
     width:100%;
     margin-top:30px;
     button {
+            color: white;
+            border: 0;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin:0;
+                transition:0.3s all; 
+                &:hover{
+            box-shadow: 10px -3px 52px 1px utilities.$secondary_color;
+          }
+          &:disabled{
+            cursor: not-allowed;
+          }
+            height:44px;
+                
         background:utilities.$secondary_color
     }
 }
 .forget_password p{
-    color:#39CDCC;
+    color:utilities.$secondary_color;
     font-size: 12px;
     ;
 }
 .password_box{
     height:4px;
+}
+.mobile_logo{
+    margin-bottom: 50px;
+}
+
+
+@media (min-width: utilities.$breakpoint-tablet) {
+  .signin_img{
+    display:flex;
+  }
+  .signin_text{
+    width:100%;
+  }
+  .mobile_logo{
+    display:none;
+  }
 }

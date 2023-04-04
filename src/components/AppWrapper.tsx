@@ -1,21 +1,28 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import SideNav from "./SideNav";
+import "../styles/main.scss"
 
 export default function AppWrapper({children}:{children : React.ReactNode}) {
 
   const Location = useLocation()
-  console.log({Location})
   const no_layout = ["/signin"]
   return (
     <div>
-     {no_layout.includes(Location.pathname) ? null :
+     {no_layout.includes(Location.pathname)  ? 
      <>
+     <div>
+      {children}
+     </div>
+     </>:  <>
      <Header />
-      <SideNav />
+      <SideNav />   <div className="children">
+      {children}
+     </div>
      </>
      }
-      {children}
+  
+      
       
       </div>
   )
