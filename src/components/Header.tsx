@@ -7,16 +7,33 @@ import { Link } from "react-router-dom"
 import useDebounce from "../hooks/useDebounce"
 import {AiOutlineSearch} from "react-icons/ai"
 import {IoIosNotificationsOutline} from "react-icons/io"
+import { searchArray } from "../utils/utilFunction"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../state/store"
+import { changeFilterSearch } from "../state/user"
+import { RxHamburgerMenu } from "react-icons/rx"
 
-const Header = () => {
+interface IHeaderProps {
+  openNotificationModal:()=>void;
+  showSideNav:boolean;
+  setShowSideNav:React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Header = ({openNotificationModal,showSideNav,setShowSideNav}:IHeaderProps) => {
   const [search,setSearch] = useState("")
-  const debouncedQuery = useDebounce(search, 300);
-  const handleInput = (name:string,value:string)=>{
+  const debouncedQuery = useDebounce(search, 400);
+  const handleInput = (value:string)=>{
     setSearch(value)
   }
+  const {users} = useSelector((state:RootState)=>state.user)
+  const dispatch = useDispatch()
 
   useEffect(()=>{
     console.log({debouncedQuery})
+  const user= searchArray(users,debouncedQuery)
+
+  dispatch(changeFilterSearch({search:debouncedQuery,users:user,main_users:users}))
+ 
   },[debouncedQuery])
   return (
     <div className="header">
@@ -26,6 +43,7 @@ const Header = () => {
       </Link>
        
     </div>
+    
     <div className="custom_input header_input"  >
         <CustomInput
         placeholder='Search for anything'
@@ -34,7 +52,7 @@ const Header = () => {
         name="password"
         // setErrorTable={setErrorTable}
         value={search}
-        changeInput={(value,name)=>handleInput(name,value)}
+        changeInput={(value,name)=>handleInput(value)}
         errors={["required","password"]}
        
         >
@@ -48,9 +66,12 @@ const Header = () => {
             Docs
           </div>
           <div className="header_ending_nav_notification">
-           <IoIosNotificationsOutline />
+           <IoIosNotificationsOutline onClick={openNotificationModal}/>
           </div>
           <ProfileTab />
+        </div>
+        <div className="hamburger_menu">
+          <RxHamburgerMenu size="22px" cursor="pointer" onClick={()=>setShowSideNav(!showSideNav)}/>
         </div>
   </div>
   

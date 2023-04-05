@@ -1,3 +1,5 @@
+import { IUser } from "./interface";
+
 export const confirmPassword = (value:string) => {
   // a password must have at least one lowercase letter, one uppercase letter, one digit, and one special character (like !, @, #, $, %, ^, &, *), and it must be at least 8 characters long.
     const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
@@ -112,3 +114,9 @@ export const confirmPassword = (value:string) => {
     
  // Output: Nov 10, 2079 11:17 PM
 
+
+export function searchArray(userArray:IUser[], searchString:string) {
+  const searchUsers = userArray.filter((user:IUser)=>user.userName.toLowerCase().includes(searchString.toLowerCase()))
+  console.log({searchUsers})
+  return searchUsers
+}

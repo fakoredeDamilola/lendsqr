@@ -1,19 +1,18 @@
 import { useState,useEffect, useRef } from "react";
 import "../../styles/components.scss"
-import { BiFilter,BiDotsVerticalRounded } from "react-icons/bi";
 
 
 interface IDropdown {
   children : React.ReactNode;
   afterIcon?: React.ReactNode;
   beforeIcon?: React.ReactNode;
-  toggleDropdown:()=>void;
   title?:string;
   width?:string;
-  icon?:string;
+  left?:string;
+  right?:string
 }
 
-function CustomDropdown({children,title,width,icon,beforeIcon,afterIcon}:IDropdown) {
+function CustomDropdown({children,title,width,beforeIcon,afterIcon,left,right}:IDropdown) {
   
 
 
@@ -27,7 +26,7 @@ const [openDropDown,setOpenDropdown] = useState(false)
       if (dropdownRef.current) {
         const dropdownRect = dropdownRef.current.getBoundingClientRect();
         const isOverflowing = dropdownRect.bottom > window.innerHeight;
-  
+        dropdownRef.current.style.right= "10%";
         if (isOverflowing) {
           dropdownRef.current.style.bottom = "100%";
         } else {
@@ -61,7 +60,7 @@ const [openDropDown,setOpenDropdown] = useState(false)
       </div>
       
       
-      <div className={`dropdown-content ${openDropDown ? "open" : ""}`} style={{width:width ?? "270px"}}>
+      <div className={`${left?"dropdown-content":"dropdown-content-left"} ${openDropDown ? "open" : ""}`} style={{width:width ?? "270px" }}>
        {children}
       </div>
     </div>

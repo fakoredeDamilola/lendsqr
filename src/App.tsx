@@ -9,15 +9,22 @@ import { AppRoutes, authRoutes, routes } from "./utils/routes";
 import useLogin from "./hooks/useLogin";
 import PrivateRoute from "./components/PrivateRoute";
 import "./styles/main.scss"
+import CustomLoadingPage from "./components/custom/CustomLoadingPage";
+import Logo from "./components/Logo";
+import usePortal from "./hooks/usePortal";
+import NotificationModal from "./components/modal/NotificationModal";
 
 function App() {
 
 const {loading,authenticated} = useLogin()
-
   return (
-    <Suspense fallback={"loading...."}>
+    <Suspense fallback={
+      <CustomLoadingPage >
+      <Logo text={true} />
+      </CustomLoadingPage>
+      }>
       <Router>
-
+     
       <AppWrapper>
 
             <Routes>
@@ -46,6 +53,7 @@ const {loading,authenticated} = useLogin()
                 }
             </Routes>
         </AppWrapper>
+        
       </Router>
     
     </Suspense>
