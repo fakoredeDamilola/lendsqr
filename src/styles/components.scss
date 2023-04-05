@@ -281,13 +281,18 @@ border-radius: 4px;
   font-size: 25px;
   margin-top:8px;
 }
+.custom_wrapper{
+  padding:20px;
+}
 .custom_picture{
  background:#{utilities.$primary-color + '29'};
  border-radius: 50%;
  display:flex;
  justify-content: center;
- align-items: center;
- 
+ align-items: center; 
+ img {
+  border-radius: 50%;
+ }
 }
 
 .dropdown-container {
@@ -466,5 +471,7 @@ justify-content:space-between;
     display: block;
   }
   }
-  
+  .hamburger_menu{
+    display:none;
+  }
 }
