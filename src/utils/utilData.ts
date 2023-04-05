@@ -16,13 +16,13 @@ export const dashboard_tab:ITab[] = [
     {
       icon:"/icons/users_with_loan.svg",
       text:"USERS WITH LOANS",
-      count:12453,
+      count:4453,
       color:"F55F44"
     },
     {
       icon:"/icons/users_with_savings.svg",
       text:"USERS WITH SAVINGS",
-      count:102453,
+      count:6453,
       color:"FF3366"
     },
   ]

@@ -45,10 +45,24 @@ email:string;
 phoneNumber:string;
 id:string;
 createdAt:string
-lastActiveDate:Date;
+lastActiveDate:Date | any;
 profile:IProfile;
 guarantor:IGuarantor;
 education:IEducation
 socials:Isocials
 
+}
+
+
+interface Idot {icon:React.ReactNode, text:string,onclick:(id:string)=>void}
+
+export interface IUserRow {
+    organization:string;
+    username:string;
+    email:string;
+    phoneNumber: string;
+    date_joined:string;
+    last_active:Date;
+    dotDropdown:Idot[];
+    id:string;
 }

@@ -10,7 +10,7 @@ import { GiSuitcase } from "react-icons/gi"
 import { IoMdArrowDropdown } from "react-icons/io"
 
 
-const SideNav = () => {
+const SideNav = ({showSideNav}:{showSideNav:boolean}) => {
   const dispatch = useDispatch()
 const {currentSideTab} = useSelector((state:RootState)=>state.user)
 
@@ -20,14 +20,14 @@ const selectTab = (name:string) => {
 
 
   return (
-    <div className="sidenav">
+    <div className={`sidenav ${showSideNav ? 'open' : ''}`} >
       <ul className="sidebar_list">
         <li>
                 {dropdownLinks.map((orgs:IChild,index:number)=>{
         return (
           
 
-             <CustomDropdown beforeIcon={<GiSuitcase size="16px"/>} afterIcon={<IoMdArrowDropdown size="16px"/>} title="Switch Organization" key={index} width="100%" toggleDropdown={()=>{}} >
+             <CustomDropdown beforeIcon={<GiSuitcase size="16px"/>} left="jej" afterIcon={<IoMdArrowDropdown size="16px"/>} title="Switch Organization" key={index} width="100%" >
             {orgs.org &&  orgs?.org.map((orgObj,index)=>{
               return (
               <li className="sidebar_list_child">

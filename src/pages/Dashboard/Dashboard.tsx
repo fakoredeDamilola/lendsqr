@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
-import {useState} from "react"
+import {useState,useEffect} from "react"
 import DashboardBox from "../../components/dashboard/DashboardBox"
 import {useDispatch,useSelector} from "react-redux"
 import "../../styles/dashboard.scss"
 import { ITab, IUser } from "../../utils/interface"
 import { useNavigate } from "react-router-dom"
-import {  changeUserPage, updateUsers } from "../../state/user"
+import {  changeUserPage, changeuserPerPage, updateUsers } from "../../state/user"
 import DashboardUserRow from "../../components/dashboard/DashboardUserRow"
 import { RootState } from "../../state/store"
 import Pagination from "../../components/Pagination"
@@ -16,6 +16,8 @@ import CustomInput from "../../components/custom/CustomInput"
 import { AiOutlineEye, AiOutlineUserAdd } from "react-icons/ai"
 import { FiUserX } from "react-icons/fi"
 import { BiFilter } from "react-icons/bi"
+import CustomSkeleton from "../../components/custom/CustomSkeleton"
+import DashboardMobileCard from "../../components/dashboard/DashboardMobileCard"
 
 
 
@@ -24,16 +26,29 @@ const table_header = ["ORGANIZATION","USERNAME","EMAIL","PHONE NUMBER","DATE JOI
 const Dashboard = () => {
 const dispatch = useDispatch()
 const navigate = useNavigate()
+ 
+const [loadingUsers,setLoadingUsers] = useState(false)
 
-  const fetchCountries = async () =>{
-    const data = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users`)
+  const fetchUsers = async () =>{
+    try{
+      const data = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users`)
     const response:IUser[] = await data.json()
     console.log({response})
     dispatch(updateUsers({users:response})) 
-    return response
+    }catch(e){
+      // no matter the error, show an empty user table
+      dispatch(updateUsers({users:[]})) 
+    }finally{
+      
+    setLoadingUsers(false)
+    }
+   
     
    }
- 
+  useEffect(()=>{
+    setLoadingUsers(true)
+    fetchUsers()
+  },[])
    const [searchFilter,setSearchFilter] = useState({
     organization:"",
     username:"",
@@ -56,12 +71,8 @@ const navigate = useNavigate()
  }
  
  console.log({searchFilter})
-//  const searchFilterDropdown = ["organization","status"]
  
  const {userListOnPage,userPerPage,currentPage,users} = useSelector((state:RootState)=>state.user)
- 
-   const {data,status,isLoading} = useQuery(['users'],fetchCountries )
-   console.log({data,status,isLoading})
 
    const changePage = (page:number) =>{
     dispatch(changeUserPage({page,users}))
@@ -117,13 +128,18 @@ const navigate = useNavigate()
       }
     </section>
       <section className="dashboard_table_containers">
-        {userListOnPage.length >0 ?  <table className="dashboard_table_users">
+        {loadingUsers?        
+         <CustomSkeleton />
+         :
+        userListOnPage.length >0 && !loadingUsers ?  
+        <>
+        <table className="dashboard_table_users">
           <thead>
              <tr className="dashboard_table_head">
           {table_header.map((col,index)=>{
             return (
               <th className="dashboard_head_item" key={index}> {col!=="" ? 
-              <CustomDropdown afterIcon={<BiFilter />} toggleDropdown={()=>{}} title={col}>
+              <CustomDropdown afterIcon={<BiFilter />} title={col} left="auto" right="70%">
                 {Object.keys(searchFilter).map((item,index)=>{
                   return  <div key={index} className="dropdown_input">
                      <CustomInput 
@@ -184,7 +200,27 @@ const navigate = useNavigate()
         </tbody>
          
         {/* </div> */}
-        </table> : <div className="dashboard_not_found">
+        </table>
+        <div className="dashboard_card_users">
+        {userListOnPage.map((user:IUser)=>{
+            return (
+              <DashboardMobileCard
+                key={user.id}
+                organization={user.orgName}
+                username={user.userName}
+                email={user.email}
+                phoneNumber={user.phoneNumber}
+                date_joined={user.createdAt}
+                last_active={user.lastActiveDate}
+                id={user.id}
+                dotDropdown={dotDropdown}
+
+              />
+            )
+          })}
+        </div>
+        </>
+         : <div className="dashboard_not_found">
             <NotFound title="No User Found" text="uh-oh....this is a problem" />
           </div>
             
@@ -202,13 +238,13 @@ const navigate = useNavigate()
                     disable={false}
                     placeholder={userPerPage}
                     type="select"
-                    changeInput={(value:string,name:string)=>setSearchFilter((prevState)=>({...prevState,[name]:value}))}
+                    changeInput={(value:string,name:string)=> dispatch(changeuserPerPage({userPerPage:parseInt(value),users})) }
                   >
                    
                     <>
                     {[10,20,30,40,50,60,70,80,90,100].map((value,index)=>{
                       return (
-                        <option value={value}>{value}</option>
+                        <option value={value} key={index}>{value}</option>
                       )
                     })
 

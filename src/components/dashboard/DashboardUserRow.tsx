@@ -2,20 +2,10 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import "../../styles/dashboard.scss"
 import { diffInYears, formatDate } from "../../utils/utilFunction";
 import CustomDropdown from "../custom/CustomDropdown";
+import { IUserRow } from "../../utils/interface";
 // import { getStatusInfo } from "../../utils/utilFunction";
 
-interface Idot {icon:React.ReactNode, text:string,onclick:(id:string)=>void}
 
-interface IUserRow {
-    organization:string;
-    username:string;
-    email:string;
-    phoneNumber: string;
-    date_joined:string;
-    last_active:Date;
-    dotDropdown:Idot[];
-    id:string;
-}
 
 const DashboardUserRow = ({organization,username,email,phoneNumber,date_joined,last_active,dotDropdown,id}:IUserRow) => {
   return (
@@ -39,7 +29,7 @@ const DashboardUserRow = ({organization,username,email,phoneNumber,date_joined,l
        <p className="dashboard_status" style={{background:`${diffInYears(last_active).color}1A`,color:diffInYears(last_active).color}}>{diffInYears(last_active).text}</p> 
       </td>
       <td>
-      <CustomDropdown afterIcon={<BiDotsVerticalRounded />} width="180px" toggleDropdown={()=>{}} icon="dots">
+      <CustomDropdown afterIcon={<BiDotsVerticalRounded />} width="180px">
      {dotDropdown.map((item,index)=>{
         return (
           <div key={index} className="dashboard_dots" onClick={()=>item.onclick(id)}>

@@ -48,8 +48,16 @@ section{
     margin:35px 0;
 }
 .children {
-    margin-left: 283px;
-    padding: 50px 20px;
-    width: calc(100% - 283px);
+   
+    padding: 50px 10px;
+    width:100%;
     background: #FBFBFB;
+   
 }
+@media (min-width: utilities.$breakpoint-tablet) {
+   .children {
+    margin-left: 283px;
+    width: calc(100% - 283px);
+    padding: 50px 20px;
+   }
+  }
