@@ -5,10 +5,11 @@ import CustomProfilePicture from '../../components/custom/CustomProfilePicture'
 import { numberWithCommas } from '../../utils/utilFunction'
 import { IUserTab, UserTabs, updateUser } from '../../state/user'
 import UserProfileTab from '../../components/user/UserProfileTab'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../state/store'
 import { IUser } from '../../utils/interface'
+import NotFound from '../../components/NotFound'
 
 const User = () => {
 
@@ -17,7 +18,7 @@ const User = () => {
   const dispatch = useDispatch()
 
 const [loading,setLoading] = useState(true)
-const [currentTab,setCurrentTab] = useState(IUserTab.GENERAL_DETAILS)
+const [currentTab,setCurrentTab] = useState("Documents")
 
 const fetchUserData = async () =>{
   const data = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${id}`)
@@ -187,19 +188,19 @@ const userProfileInfo:IProfileTab[] = [
           <div className="user_details">
             <h2>User Details</h2>
           </div>
-          <div className="user_details_button">
+          <div className="user_details_button desktop_button">
             <button onClick={blackListUser} className='user_blacklist_button'>BLACKLIST USER</button>
             <button onClick={blackListUser} className='user_activate_button'>ACTIVATE USER</button>
           </div>
          </section>
          <section className="section user_general_section">
           <div className="user_general_info_section">
-             <CustomProfilePicture image="" name="" style={{width:"100px",height:"100px"}} size="40px" color="blue" />
+             <CustomProfilePicture image={user?.profile?.avatar} name="" style={{width:"100px",height:"100px"}} size="40px" color="blue" />
           <div className="user_section_one_text">
         <h3>{userBasicInfo.fullName}</h3>
         <p>{userBasicInfo.orgName}</p>
           </div>
-          <div className="user_section_one_text">
+          <div className="user_section_one_text user_tier">
         <p>User’s Tier</p>
         <p>{userBasicInfo.tier} stars</p>
           </div>
@@ -208,11 +209,14 @@ const userProfileInfo:IProfileTab[] = [
         <p>{userBasicInfo.bankNumber}/{userBasicInfo.bankName}</p>
           </div>
           </div>
-         
+          <div className="user_details_button mobile_button">
+            <button onClick={blackListUser} className='user_blacklist_button'>BLACKLIST USER</button>
+            <button onClick={blackListUser} className='user_activate_button'>ACTIVATE USER</button>
+          </div>
           <div className="user_section_one_tabs">
              {UserTabs.map((tab:string,index:number)=>{
             return (
-              <div key={index} className={`user_section_one_tab ${currentTab === tab ?"selected":""}`}>
+              <div key={index} className={`user_section_one_tab ${currentTab === tab ?"selected":""}`} onClick={()=>setCurrentTab(tab)}>
                 {tab}
               </div>
             )
@@ -223,6 +227,7 @@ const userProfileInfo:IProfileTab[] = [
          
          </section>
          <section className=" section">
+         {currentTab === IUserTab.GENERAL_DETAILS ?
           <div>
             {userProfileInfo.map((profileInfo:IProfileTab,index:number)=>{
               console.log({userProfileInfo})
@@ -235,12 +240,19 @@ const userProfileInfo:IProfileTab[] = [
             })
 
           }
+          </div>:
+          <div className='not-found-tab'>
+           <h1>Coming soon</h1>
           </div>
+          }
           
          </section>
 
         </div>
-         : null}
+         : <div className="user_not_found">
+         <NotFound title="No User Found" text="uh-oh....we understand what you feel" />
+         <Link to="/dashboard">Go back home</Link>
+       </div>}
         </main>
         
     

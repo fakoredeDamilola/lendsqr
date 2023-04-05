@@ -35,7 +35,6 @@ export default function Pagination ({
       const onPrevious = () => {
         onPageChange(currentPage - 1);
       };
-      console.log({pageSize,totalCount,paginationRange})
     return (
       <div>
         

@@ -108,7 +108,9 @@
   .dashboard_numbering{
     display:flex;
     justify-content: space-between;
-    align-items:center;
+    gap:20px;
+    flex-direction: column;
+    
   }
   .dashboard_count{
     display:flex;
@@ -155,28 +157,7 @@
       }
     }
   }
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 8px;;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    /* box-shadow: inset 0 0 5px grey;  */
-    border-radius: 10px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: utilities.$primary-color; 
-    border-radius: 3px;
-  
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: utilities.$secondary_color; 
-  }
+ 
   
   .dashboard_not_found{
     padding:40px 0;
@@ -238,7 +219,12 @@
     border:utilities.$border;
     box-shadow: utilities.$box_shadow;
   }
-  .hamburger_menu{
-    display:none;
+  .dashboard_numbering{
+    display:flex;
+    justify-content: space-between;
+    gap:20px;
+    flex-direction:row;
+    align-items: center;
+    
   }
   }
