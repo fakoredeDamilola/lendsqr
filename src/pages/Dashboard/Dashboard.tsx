@@ -28,13 +28,18 @@ const dispatch = useDispatch()
 const navigate = useNavigate()
  
 const [loadingUsers,setLoadingUsers] = useState(false)
-
+ 
+const {userListOnPage,userPerPage,currentPage,users} = useSelector((state:RootState)=>state.user)
   const fetchUsers = async () =>{
     try{
-      const data = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users`)
+      if(users.length===0){
+        const data = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users`)
     const response:IUser[] = await data.json()
     console.log({response})
-    dispatch(updateUsers({users:response})) 
+     dispatch(updateUsers({users:response})) 
+      }
+      
+   
     }catch(e){
       // no matter the error, show an empty user table
       dispatch(updateUsers({users:[]})) 
@@ -71,8 +76,7 @@ const [loadingUsers,setLoadingUsers] = useState(false)
  }
  
  console.log({searchFilter})
- 
- const {userListOnPage,userPerPage,currentPage,users} = useSelector((state:RootState)=>state.user)
+
 
    const changePage = (page:number) =>{
     dispatch(changeUserPage({page,users}))

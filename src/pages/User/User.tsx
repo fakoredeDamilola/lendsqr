@@ -18,7 +18,7 @@ const User = () => {
   const dispatch = useDispatch()
 
 const [loading,setLoading] = useState(true)
-const [currentTab,setCurrentTab] = useState("Documents")
+const [currentTab,setCurrentTab] = useState("General Details")
 
 const fetchUserData = async () =>{
   const data = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${id}`)
@@ -31,11 +31,25 @@ const fetchUserData = async () =>{
 
 useEffect(()=>{
 const getUser = async ()=>{
-const user =users.length> 0 ? 
+  try{
+   const user =users.length> 0 ? 
             users.find((user:IUser) => user.id === id) :
            await fetchUserData()
-  dispatch(updateUser({user:user ?? null})) 
-  setLoading(false)
+           if(user?.id){
+           console.log({user},"kkrk")
+            dispatch(updateUser({user})) 
+           }else{
+            
+           dispatch(updateUser({user:null})) 
+           }
+  
+   
+  }catch(e){
+    dispatch(updateUser({user:null})) 
+  }finally{
+    setLoading(false)
+  }
+
   }
   getUser()
 },[id])
@@ -46,7 +60,7 @@ const blackListUser = () =>{
 
 }
 const userBasicInfo={
-  fullName:`${user?.profile.firstName} ${user?.profile.lastName}`,
+  fullName:`${user?.profile?.firstName} ${user?.profile?.lastName}`,
   orgName: user?.orgName,
   tier:3,
   accountBalance:user?.accountBalance,
@@ -69,7 +83,7 @@ const userProfileInfo:IProfileTab[] = [
     profileInfoItem: [
       {
         name:"full name",
-        value:`${user?.profile.firstName} ${user?.profile.lastName}`
+        value:`${user?.profile?.firstName} ${user?.profile?.lastName}`
       },
       {
         name:"phone number",
@@ -81,11 +95,11 @@ const userProfileInfo:IProfileTab[] = [
       },
       {
         name:"bvn",
-        value: user?.profile.bvn
+        value: user?.profile?.bvn
       },
       {
         name:"gender",
-        value: user?.profile.gender
+        value: user?.profile?.gender
       },
       {
         name:"marital status",
@@ -165,15 +179,16 @@ const userProfileInfo:IProfileTab[] = [
       },
       {
         name:"email address",
-        value:`${user?.guarantor.address}`
+        value:`${user?.guarantor?.address}`
       },
       {
         name:"relationship",
-        value:`${user?.guarantor.gender}`
+        value:`${user?.guarantor?.gender}`
       },
     ]
   }
 ]
+console.log({user},"kekkekkee")
     return (
         <div className="user_page">
         <h2>Users</h2>

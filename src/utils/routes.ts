@@ -13,16 +13,13 @@ export type AppRoutes = {
   };
 
 export const routes: AppRoutes[] = [
-  { path: '/dashboard', exact: true, component: Dashboard },
-  { path: '/user/:id', exact: true, component: User },
-  { path: '/', exact: true, component: Home },
-  { path: '/signin', exact: true, component: Signin },
+  { path: '/signin', exact: true, component: Signin }
   ];
   
   ///council/dispute
   export const authRoutes: AppRoutes[] = [
-    // { path: '/', exact: true, component: Home },
-    // { path: '/signin', exact: true, component: Signin },
-    // { path: '/dashboard', exact: true, component: Dashboard }
+    { path: '/dashboard', exact: true, component: Dashboard },
+    { path: '/', exact: true, component: Dashboard },
+    { path: '/user/:id', exact: true, component: User },
   ];
   

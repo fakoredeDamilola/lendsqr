@@ -1,0 +1,200 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<User /> > Matches snapshot 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="user_page"
+      >
+        <h2>
+          Users
+        </h2>
+        <main
+          class="user_page_main"
+        >
+          <section
+            class="user_page_section"
+          >
+            <div
+              class="back_container"
+            >
+              <div
+                class="back_icon"
+              >
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 16 16"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                    fill-rule="evenodd"
+                  />
+                </svg>
+              </div>
+              <div
+                class="back_link_texts"
+              >
+                <a
+                  class="link_tag"
+                  href="/dashboard"
+                >
+                  Back to Users
+                </a>
+              </div>
+            </div>
+          </section>
+          <div
+            class="user_not_found"
+          >
+            <div
+              class="not_found"
+            >
+              <h1>
+                No User Found
+              </h1>
+              <div
+                class="not_found_text"
+              >
+                uh-oh....we understand what you feel
+              </div>
+            </div>
+            <a
+              href="/dashboard"
+            >
+              Go back home
+            </a>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="user_page"
+    >
+      <h2>
+        Users
+      </h2>
+      <main
+        class="user_page_main"
+      >
+        <section
+          class="user_page_section"
+        >
+          <div
+            class="back_container"
+          >
+            <div
+              class="back_icon"
+            >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 16 16"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <div
+              class="back_link_texts"
+            >
+              <a
+                class="link_tag"
+                href="/dashboard"
+              >
+                Back to Users
+              </a>
+            </div>
+          </div>
+        </section>
+        <div
+          class="user_not_found"
+        >
+          <div
+            class="not_found"
+          >
+            <h1>
+              No User Found
+            </h1>
+            <div
+              class="not_found_text"
+            >
+              uh-oh....we understand what you feel
+            </div>
+          </div>
+          <a
+            href="/dashboard"
+          >
+            Go back home
+          </a>
+        </div>
+      </main>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

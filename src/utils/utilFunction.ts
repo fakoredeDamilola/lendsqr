@@ -25,7 +25,6 @@ export const confirmPassword = (value:string) => {
   
     export const checkForError = (
       inputInfo:any,
-      setErrorTable:React.Dispatch<React.SetStateAction<string[]>>,
       excludeInput:string[]
       ) =>{
       let value:keyof typeof inputInfo
@@ -33,10 +32,10 @@ export const confirmPassword = (value:string) => {
       for( value in inputInfo){
         let str = inputInfo[value]
       if(str==="" && !excludeInput.includes(value)){
+
           arr.push(value)
         }
       }
-        setErrorTable([...arr])
         return arr
     }
 
@@ -49,17 +48,14 @@ export const confirmPassword = (value:string) => {
     
     }
 
-    function subtractYears(date:Date, years:number) {
-      let newDate =date.setDate(date.getFullYear() - years);
-      return newDate;
-    }
+   
 
     export function diffInYears(date1:Date):{color:string,text:string} {
       date1 = new Date(date1)
       const year1 = new Date(date1).getFullYear();
       const date2 =new Date();
       const year2 =new Date().getFullYear();
-      const diff = year2 - year1;
+      const diff = year1 - year2;
       const styleStatus = {
         color:"",
         text:""
@@ -73,29 +69,25 @@ export const confirmPassword = (value:string) => {
       if (date2.getMonth() === date1.getMonth() && date2.getDate() < date1.getDate()) {
        diff - 1;
       }
-    
-      if(diff< -20){
-        styleStatus.text="Blacklisted"
-        styleStatus.color="#E4033B"
-      }else if(diff < -10){
-        styleStatus.text="Inactive"
-        styleStatus.color="#545F7D"
-      }else if(diff < -5 ){
+      const absDifference = Math.abs(diff); 
+      if (diff > 0 || absDifference < 5) { 
+        styleStatus.text="active"
+        styleStatus.color="#39CD62" 
+      } else if (absDifference < 10) {
         styleStatus.text="Pending"
         styleStatus.color="#E9B200"
-      }else{
-        styleStatus.text="active"
-        styleStatus.color="#39CD62"
-      }
+      } else if (absDifference < 20) { 
+        styleStatus.text="Inactive"
+        styleStatus.color="#545F7D"
+       } else { 
+        styleStatus.text="Blacklisted"
+        styleStatus.color="#E4033B"
+       } 
+      
       return styleStatus;
 
     }
-
-//     const date1 = new Date('1990-01-01');
-// const date2 = new Date('2023-04-03');
-// const diff = diffInYears(date1);
-
-// console.log(diff);
+;
 
     export function formatDate(dateString:string) {
       const date = new Date(dateString);
@@ -117,6 +109,5 @@ export const confirmPassword = (value:string) => {
 
 export function searchArray(userArray:IUser[], searchString:string) {
   const searchUsers = userArray.filter((user:IUser)=>user.userName.toLowerCase().includes(searchString.toLowerCase()))
-  console.log({searchUsers})
   return searchUsers
 }
