@@ -1,5 +1,5 @@
-import React from "react";
-import { useLocation, Navigate } from "react-router-dom";
+import {  Navigate } from "react-router-dom";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 
 export default function PrivateRoute({
@@ -9,13 +9,13 @@ export default function PrivateRoute({
   children: JSX.Element;
   authenticated: boolean;
 }) {
-    let auth = localStorage.getItem("authToken");
-
-  if(true){
+  const [authToken] = useLocalStorage("auth",false)
+console.log({})
+  if(!authToken){
     // Redirect them to the /unauthorized page, but save the current location they were
     // trying to go to when they were redirected.
     return <Navigate to='/unauthorized'
-    // state={{ from: location }} replace
+    replace
     />;
   }
 

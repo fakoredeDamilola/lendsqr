@@ -1,10 +1,12 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import CustomInput from "../../components/custom/CustomInput"
 import Logo from "../../components/Logo"
 import PasswordIndicator from "../../components/PasswordIndicator"
 import "../../styles/signin.scss"
-import { confirmPassword } from "../../utils/utilFunction"
+import { checkForError, confirmPassword } from "../../utils/utilFunction"
 import CustomButton from "../../components/custom/CustomButton"
+import useLocalStorage from "../../hooks/useLocalStorage"
+import { useNavigate } from "react-router-dom"
 
 const Signin = () => {
 const [signinObj,setSigninObj] = useState({
@@ -14,7 +16,18 @@ password:""
 const [disableButton,setDisableButton] = useState(true)
 const [errorTable,setErrorTable] = useState<Array<string>>([])
 const [passwordIndicator,setPasswordIndicator] = useState("empty")
+const [authToken,setAuthToken] = useLocalStorage("auth",false)
 const [passwordType,setPasswordType] = useState(true)
+
+const navigate = useNavigate()
+
+useEffect(()=>{
+  if(errorTable.length=== 0 && passwordIndicator==="strong"|| passwordIndicator==="medium"){
+    setDisableButton(false)
+  }else{
+    setDisableButton(true)
+  }
+},[passwordIndicator,errorTable])
 
 const handleInput = (name:string,value:string) => {
   setErrorTable([])
@@ -28,15 +41,18 @@ const handleInput = (name:string,value:string) => {
        const password = confirmPassword(value)
         setPasswordIndicator(password)
     }
-    if(errorTable.length=== 0 && passwordIndicator==="strong"|| passwordIndicator==="medium"){
-      setDisableButton(false)
-    }else{
-      setDisableButton(true)
-    }
+    console.log({passwordIndicator})
+    
 }
 
 const signIn = () => {
-  console.log(12)
+  const arr= checkForError(signinObj,[])
+  setErrorTable([...arr])
+  console.log({arr})
+  if(arr.length===0){
+    setAuthToken(true)
+   navigate("/dashboard")
+  }
 }
 
 const colorbackground = passwordIndicator ==="weak" ? "red": passwordIndicator==="medium" ? "orange" : "green"
@@ -80,7 +96,7 @@ const colorbackground = passwordIndicator ==="weak" ? "red": passwordIndicator==
         placeholder='password'
         type={passwordType ?"password":"string"}
         isError={errorTable.includes("password") || errorTable.includes("passLength") && true}
-        error ={errorTable.includes("password") ? "Please enter a password" : errorTable.includes("passLength") ? "length is less than 8": ""}
+        error ={errorTable.includes("password") ? "Please enter a password" : ""}
         name="password"
         setErrorTable={setErrorTable}
         value={signinObj.password}

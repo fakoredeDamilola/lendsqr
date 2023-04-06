@@ -29,7 +29,6 @@ const Header = ({openNotificationModal,showSideNav,setShowSideNav}:IHeaderProps)
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    console.log({debouncedQuery})
   const user= searchArray(users,debouncedQuery)
 
   dispatch(changeFilterSearch({search:debouncedQuery,users:user,main_users:users}))
@@ -37,13 +36,18 @@ const Header = ({openNotificationModal,showSideNav,setShowSideNav}:IHeaderProps)
   },[debouncedQuery])
   return (
     <div className="header">
+      <div className="hamburger_menu">
+          <RxHamburgerMenu size="22px" cursor="pointer" onClick={()=>setShowSideNav(!showSideNav)}/>
+        </div>
     <div className="logo_wrapper">
       <Link to="/" style={{textDecoration:"none"}}>
        <Logo text={true}  />
       </Link>
        
     </div>
-    
+    <div className="header_ending_nav_notification mobile_notification">
+           <IoIosNotificationsOutline onClick={openNotificationModal}/>
+          </div>
     <div className="custom_input header_input"  >
         <CustomInput
         placeholder='Search for anything'
@@ -65,14 +69,12 @@ const Header = ({openNotificationModal,showSideNav,setShowSideNav}:IHeaderProps)
           <div className="header_ending_nav_docs">
             Docs
           </div>
-          <div className="header_ending_nav_notification">
+          <div className="header_ending_nav_notification desktop_notification">
            <IoIosNotificationsOutline onClick={openNotificationModal}/>
           </div>
           <ProfileTab />
         </div>
-        <div className="hamburger_menu">
-          <RxHamburgerMenu size="22px" cursor="pointer" onClick={()=>setShowSideNav(!showSideNav)}/>
-        </div>
+        
   </div>
   
   )

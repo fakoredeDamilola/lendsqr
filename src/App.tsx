@@ -3,7 +3,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { Suspense, useState } from 'react'
+import { Suspense } from 'react'
 import AppWrapper from "./components/AppWrapper";
 import { AppRoutes, authRoutes, routes } from "./utils/routes";
 import useLogin from "./hooks/useLogin";
@@ -11,12 +11,11 @@ import PrivateRoute from "./components/PrivateRoute";
 import "./styles/main.scss"
 import CustomLoadingPage from "./components/custom/CustomLoadingPage";
 import Logo from "./components/Logo";
-import usePortal from "./hooks/usePortal";
-import NotificationModal from "./components/modal/NotificationModal";
+import NotFound from "./components/NotFound";
 
 function App() {
 
-const {loading,authenticated} = useLogin()
+const {authenticated} = useLogin()
   return (
     <Suspense fallback={
       <CustomLoadingPage >
@@ -51,9 +50,11 @@ const {loading,authenticated} = useLogin()
                   );
                 })
                 }
+                <Route path='*' element={<NotFound text="Uhm....abeg, go back home" title="this is 404!!!" style={{margin:"100px 0"}} />
+                  }/>
             </Routes>
         </AppWrapper>
-        
+      
       </Router>
     
     </Suspense>

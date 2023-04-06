@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "../styles/components.scss"
 import { IChild, ILinks, dropdownLinks, fastLinks, linkLists } from "../utils/linkList"
 import { FaSignOutAlt } from "react-icons/fa"
@@ -8,11 +8,20 @@ import { switchSideBarTab } from "../state/user"
 import CustomDropdown from "./custom/CustomDropdown"
 import { GiSuitcase } from "react-icons/gi"
 import { IoMdArrowDropdown } from "react-icons/io"
+import useLocalStorage from "../hooks/useLocalStorage"
 
 
 const SideNav = ({showSideNav}:{showSideNav:boolean}) => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 const {currentSideTab} = useSelector((state:RootState)=>state.user)
+
+const [auth,setAuth] = useLocalStorage("auth",true)
+
+const signout = () =>{
+  setAuth(false)
+  navigate("/signin")
+}
 
 const selectTab = (name:string) => {
   dispatch(switchSideBarTab({sidetab:name}))
@@ -27,7 +36,7 @@ const selectTab = (name:string) => {
         return (
           
 
-             <CustomDropdown beforeIcon={<GiSuitcase size="16px"/>} left="jej" afterIcon={<IoMdArrowDropdown size="16px"/>} title="Switch Organization" key={index} width="100%" >
+             <CustomDropdown beforeIcon={<GiSuitcase size="16px"/>} left="0" afterIcon={<IoMdArrowDropdown size="16px"/>} title="Switch Organization" key={index} width="100%" >
             {orgs.org &&  orgs?.org.map((orgObj,index)=>{
               return (
               <li className="sidebar_list_child">
@@ -89,9 +98,9 @@ const selectTab = (name:string) => {
      <div className="ul_logout">
        <ul className="sidebar_list">
       <li>
-      <Link className="li_link" to ={`/signin`}>
+      <div className="li_link" onClick={signout}>
                 <div><FaSignOutAlt /></div>
-                 <p>Logout</p></Link>
+                 <p>Logout</p></div>
       </li>
       <li className="li_version">
         v1.2.0

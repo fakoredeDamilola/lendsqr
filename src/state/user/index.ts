@@ -47,6 +47,7 @@ const userSlice = createSlice({
         state.userListOnPage = miniUsers
     },
     updateUser: (state , action : PayloadAction<{user : IUser | null}>) => {
+        
         state.user = action.payload.user
     },
     changeUserPage: (state , action : PayloadAction<{page : number,users:IUser[]}>) =>{
