@@ -39,7 +39,7 @@ const DashboardMobileCard = ({organization,username,email,phoneNumber,date_joine
       </div>
       <div className="dashborad_mobile_item">
         <h4>status</h4>
-        <p>  <div className="dashboard_status" style={{background:`${diffInYears(last_active).color}1A`,color:diffInYears(last_active).color}}>{diffInYears(last_active).text}</div> </p>
+      <div className="dashboard_status" style={{background:`${diffInYears(last_active).color}1A`,color:diffInYears(last_active).color}}>   {diffInYears(last_active).text}</div> 
       </div>
     </div>
   )

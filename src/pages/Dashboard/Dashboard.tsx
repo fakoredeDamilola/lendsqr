@@ -1,11 +1,11 @@
-import { useQuery } from "@tanstack/react-query"
+
 import {useState,useEffect} from "react"
 import DashboardBox from "../../components/dashboard/DashboardBox"
 import {useDispatch,useSelector} from "react-redux"
 import "../../styles/dashboard.scss"
 import { ITab, IUser } from "../../utils/interface"
 import { useNavigate } from "react-router-dom"
-import {  changeUserPage, changeuserPerPage, updateUsers } from "../../state/user"
+import {  changeUserPage, changeuserPerPage, searchFilterDropdown, updateUsers } from "../../state/user"
 import DashboardUserRow from "../../components/dashboard/DashboardUserRow"
 import { RootState } from "../../state/store"
 import Pagination from "../../components/Pagination"
@@ -29,13 +29,12 @@ const navigate = useNavigate()
  
 const [loadingUsers,setLoadingUsers] = useState(false)
  
-const {userListOnPage,userPerPage,currentPage,users} = useSelector((state:RootState)=>state.user)
+const {userListOnPage,userPerPage,currentPage,filterSearch:users} = useSelector((state:RootState)=>state.user)
   const fetchUsers = async () =>{
     try{
       if(users.length===0){
         const data = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users`)
     const response:IUser[] = await data.json()
-    console.log({response})
      dispatch(updateUsers({users:response})) 
       }
       
@@ -62,20 +61,6 @@ const {userListOnPage,userPerPage,currentPage,users} = useSelector((state:RootSt
     "phone number":"",
     status:""
    })
- const searchFilterDropdown = {
-  "organization":[
-    {name:"organization",value:"org1"},
-    {name:"organization",value:"org2"},
-    {name:"organization",value:"org3"},
-  ],
-  "status":[
-    {name:"status",value:"stat1"},
-    {name:"status",value:"stat2"},
-    {name:"status",value:"stat3"},
-  ]
- }
- 
- console.log({searchFilter})
 
 
    const changePage = (page:number) =>{
@@ -101,7 +86,6 @@ const {userListOnPage,userPerPage,currentPage,users} = useSelector((state:RootSt
 
    }
    const viewUser = (id:string) => {
-    console.log({id})
     navigate(`/user/${id}`)
     
    }
@@ -162,7 +146,7 @@ const {userListOnPage,userPerPage,currentPage,users} = useSelector((state:RootSt
                     <>
                     {searchFilterDropdown[item as keyof typeof searchFilterDropdown].map((obj,index)=>{
                       return (
-                        <option value={obj.value}>{obj.value}</option>
+                        <option value={obj.value} key={index}>{obj.value}</option>
                       )
                     })
 

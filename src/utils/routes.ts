@@ -1,10 +1,10 @@
 import React from "react";
 
 
-const Home = React.lazy(() => import("../pages/Home/Home"));
 const Signin = React.lazy(() => import("../pages/signin/Signin"));
 const Dashboard = React.lazy(() => import("../pages/Dashboard/Dashboard"));
 const User = React.lazy(() => import("../pages/User/User"));
+const Unauthorized = React.lazy(() => import("../pages/unauthorized/Unauthorized"));
 
 export type AppRoutes = {
     path: string;
@@ -13,7 +13,9 @@ export type AppRoutes = {
   };
 
 export const routes: AppRoutes[] = [
-  { path: '/signin', exact: true, component: Signin }
+  { path: '/signin', exact: true, component: Signin },
+  { path: '/unauthorized', exact: true, component: Unauthorized },
+
   ];
   
   ///council/dispute
