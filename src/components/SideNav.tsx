@@ -17,9 +17,11 @@ const SideNav = ({showSideNav}:{showSideNav:boolean}) => {
 const {currentSideTab} = useSelector((state:RootState)=>state.user)
 
 const [auth,setAuth] = useLocalStorage("auth",true)
+const [loginDetails,setLoginDetails] = useLocalStorage("loginDetails",{email:"",password:""})
 
 const signout = () =>{
   setAuth(false)
+  setLoginDetails({email:"",password:""})
   navigate("/signin")
 }
 
@@ -30,8 +32,8 @@ const selectTab = (name:string) => {
 
   return (
     <div className={`sidenav ${showSideNav ? 'open' : ''}`} >
-      <ul className="sidebar_list">
-        <li>
+      <ul>
+        <li className="sidebar_list_child sidebar_first">
                 {dropdownLinks.map((orgs:IChild,index:number)=>{
         return (
           
@@ -39,9 +41,12 @@ const selectTab = (name:string) => {
              <CustomDropdown beforeIcon={<GiSuitcase size="16px"/>} left="0" afterIcon={<IoMdArrowDropdown size="16px"/>} title="Switch Organization" key={index} width="100%" >
             {orgs.org &&  orgs?.org.map((orgObj,index)=>{
               return (
-              <li className="sidebar_list_child">
-                  <div key={index}>{orgObj.name}</div>
+                <ul key={index} className="sidebar_list_child">
+                   <li>
+                  <div >{orgObj.name}</div>
                   </li>
+                </ul>
+             
                   
               )
             })

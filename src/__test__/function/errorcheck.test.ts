@@ -3,7 +3,6 @@ import { testObj1, testObj2, testObj3 } from "../testData"
 
 describe("Error check",()=>{
     it("check for errors in an object",()=>{
-        console.log(123)
         expect(checkForError(testObj1,[])).toEqual([])
         expect(checkForError(testObj2,[])).toEqual(["name"])
         expect(checkForError(testObj2,["name"])).toEqual([])

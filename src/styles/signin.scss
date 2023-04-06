@@ -37,13 +37,11 @@
         margin-top:10px;
     }
 }
-.signin_txt{
-}
 .sigin_button{
     width:100%;
     margin-top:30px;
     button {
-            color: white;
+            color: utilities.$background_color;
             border: 0;
             border-radius: 6px;
             padding: 10px 20px;

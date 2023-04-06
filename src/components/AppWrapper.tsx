@@ -14,7 +14,7 @@ export default function AppWrapper({children}:{children : React.ReactNode}) {
   const Portal = usePortal(document.querySelector("#portal"));
 
   const Location = useLocation()
-  const no_layout = ["/signin"]
+  const no_layout = ["/signin","/unauthorized"]
   return (
     <>
      {no_layout.includes(Location.pathname)  ? 
