@@ -1,8 +1,5 @@
 @use 'utilities'; 
 
-.user_page{
-    
-}
 
 .user_details_section{
     display:flex;
@@ -25,26 +22,26 @@
         transition: 0.3s all;
         &:hover{
             background:utilities.$secondary_color;
-            color:white;
+            color:utilities.$background_color;
         }
     }
     .user_blacklist_button{
-        border:1px solid #E4033B;
-        color:#E4033B;
+        border:1px solid utilities.$danger;
+        color:utilities.$danger;
         transition: 0.3s all;
         &:hover{
-            background:#E4033B;
-            color:white;
+            background:utilities.$danger;
+            color:utilities.$background_color;
         }
     }
 }
 .section{
     padding:20px;
-    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+    box-shadow:utilities.$box_shadow;
     box-sizing:border-box;
     width:100%;
     border-radius: utilities.$border_radius;
-    background:#FFFFFF;
+    background:utilities.$background_color;
     position:relative;
     
 }
@@ -55,8 +52,6 @@
     }
     .user_tier{
         display:flex !important;
-        // justify-content: space-between;
-        // background:red;
     }
 }
 
@@ -106,10 +101,8 @@
     }
   }
 .user_profile_tab{
-
-    // opacity: 0.1;
     padding:20px 0;
-    border-top: 1px solid #213F7D;
+    border-top: 1px solid utilities.$primary-color;
   .user_profile_tab_info{ 
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); 
@@ -138,7 +131,7 @@
           display:flex;
     }
     .user_section_one_text:nth-child(3){
-    border:1px solid #545F7D;
+    border:1px solid utilities.$text-color;
     border-top:none;
     border-bottom:none;
 }

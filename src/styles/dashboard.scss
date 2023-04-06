@@ -18,7 +18,7 @@
   
   .dashboard_box{
     border: 1px solid rgba(33, 63, 125, 0.06);
-  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  box-shadow: utilities.$box_shadow;
   background:#FFFFFF;
   border-radius: utilities.$border_radius;
   width:240px;
@@ -227,9 +227,5 @@
     align-items: center;
     
   }
-  .dashboard_head_item{
-    & .dropdown_header{
-      min-width: 110px;
-    }
-  }
+ 
   }

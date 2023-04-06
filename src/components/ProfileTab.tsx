@@ -16,7 +16,7 @@ const ProfileTab = ({name,signout}:{name?:string;signout:()=>void}) => {
             {name!=="" ?name : "Damilola"}
         </div>
         
-        <CustomDropdown afterIcon={<MdArrowDropDown />}>
+        <CustomDropdown  afterIcon={<MdArrowDropDown />}>
         <div className="ul_logout">
        <ul className="sidebar_list">
       <li>

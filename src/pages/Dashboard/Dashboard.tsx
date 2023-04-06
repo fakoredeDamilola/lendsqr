@@ -29,7 +29,7 @@ const navigate = useNavigate()
  
 const [loadingUsers,setLoadingUsers] = useState(false)
  
-const {userListOnPage,userPerPage,currentPage,users} = useSelector((state:RootState)=>state.user)
+const {userListOnPage,userPerPage,currentPage,filterSearch:users} = useSelector((state:RootState)=>state.user)
   const fetchUsers = async () =>{
     try{
       if(users.length===0){

@@ -41,9 +41,12 @@ const selectTab = (name:string) => {
              <CustomDropdown beforeIcon={<GiSuitcase size="16px"/>} left="0" afterIcon={<IoMdArrowDropdown size="16px"/>} title="Switch Organization" key={index} width="100%" >
             {orgs.org &&  orgs?.org.map((orgObj,index)=>{
               return (
-              <li className="sidebar_list_child">
-                  <div key={index}>{orgObj.name}</div>
+                <ul key={index} className="sidebar_list_child">
+                   <li>
+                  <div >{orgObj.name}</div>
                   </li>
+                </ul>
+             
                   
               )
             })

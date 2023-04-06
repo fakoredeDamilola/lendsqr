@@ -80,7 +80,10 @@ const signout = () =>{
         </div>
         <div className="header_ending_nav">
           <div className="header_ending_nav_docs">
-            Docs
+            <a href="https://www.lendsqr.com/" target="_blank">
+               Docs
+            </a>
+           
           </div>
           <div className="header_ending_nav_notification desktop_notification">
            <IoIosNotificationsOutline onClick={openNotificationModal}/>
