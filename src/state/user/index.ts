@@ -12,6 +12,19 @@ export enum IUserTab {
     APP_SYSTEM="App and System"
 }
 
+export const searchFilterDropdown ={
+    "organization":[
+      {name:"organization",value:"org1"},
+      {name:"organization",value:"org2"},
+      {name:"organization",value:"org3"},
+    ],
+    "status":[
+      {name:"status",value:"stat1"},
+      {name:"status",value:"stat2"},
+      {name:"status",value:"stat3"},
+    ]
+   }
+
 interface UserState {
     users : IUser[];
     filterSearch : IUser[];
@@ -19,19 +32,21 @@ interface UserState {
     currentPage: number;
     userPerPage:number;
     userListOnPage:IUser[]
-    currentSideTab:string
+    currentSideTab:string;
 }
 
 export const UserTabs = ["General Details","Documents","Bank Details","Loans","Savings","App and System"]
 
 const initialState : UserState = {
-    users: [],
+    users: [ ],
     filterSearch:[],
     user:null,
     userPerPage:10,
     currentPage:1,
     userListOnPage:[],
-    currentSideTab:"users"
+    currentSideTab:"users",
+   
+       
 }
 const userSlice = createSlice({
     name : "user",
@@ -70,13 +85,10 @@ const userSlice = createSlice({
     },
     changeFilterSearch:(state , action : PayloadAction<{search:string,users:IUser[],main_users:IUser[]}>) =>{
         const {search,users,main_users} = action.payload
-        console.log({search})
         if(search){
             state.filterSearch = users
             
         }else{
-            console.log("kejeijekmneknejjjekjekjk")
-            console.log({main_users})
             state.filterSearch = main_users
         }
         const startIndex = state.currentPage ===1 ? 0 : (state.currentPage-1) * state.userPerPage
@@ -84,7 +96,6 @@ const userSlice = createSlice({
             const miniUsers =users.slice(startIndex,endIndex)
             state.userListOnPage = miniUsers
             state.currentPage=state.currentPage
-        // state.filterSearch = users
     }
    }
 });

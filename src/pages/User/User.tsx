@@ -23,7 +23,6 @@ const [currentTab,setCurrentTab] = useState("General Details")
 const fetchUserData = async () =>{
   const data = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${id}`)
   const response:IUser = await data.json()
-  console.log({response})
   return response
   
  }
@@ -36,7 +35,6 @@ const getUser = async ()=>{
             users.find((user:IUser) => user.id === id) :
            await fetchUserData()
            if(user?.id){
-           console.log({user},"kkrk")
             dispatch(updateUser({user})) 
            }else{
             
@@ -55,7 +53,6 @@ const getUser = async ()=>{
 },[id])
 
 
-console.log({user})
 const blackListUser = () =>{
 
 }
@@ -188,7 +185,6 @@ const userProfileInfo:IProfileTab[] = [
     ]
   }
 ]
-console.log({user},"kekkekkee")
     return (
         <div className="user_page">
         <h2>Users</h2>
@@ -245,7 +241,6 @@ console.log({user},"kekkekkee")
          {currentTab === IUserTab.GENERAL_DETAILS ?
           <div>
             {userProfileInfo.map((profileInfo:IProfileTab,index:number)=>{
-              console.log({userProfileInfo})
               return (
                 <UserProfileTab
                 key={index} 

@@ -227,4 +227,9 @@
     align-items: center;
     
   }
+  .dashboard_head_item{
+    & .dropdown_header{
+      min-width: 110px;
+    }
+  }
   }

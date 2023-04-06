@@ -17,6 +17,7 @@ const [disableButton,setDisableButton] = useState(true)
 const [errorTable,setErrorTable] = useState<Array<string>>([])
 const [passwordIndicator,setPasswordIndicator] = useState("empty")
 const [authToken,setAuthToken] = useLocalStorage("auth",false)
+const [loginDetails,setLoginDetails] = useLocalStorage("loginDetails",{email:"",password:""})
 const [passwordType,setPasswordType] = useState(true)
 
 const navigate = useNavigate()
@@ -41,16 +42,15 @@ const handleInput = (name:string,value:string) => {
        const password = confirmPassword(value)
         setPasswordIndicator(password)
     }
-    console.log({passwordIndicator})
     
 }
 
 const signIn = () => {
   const arr= checkForError(signinObj,[])
   setErrorTable([...arr])
-  console.log({arr})
   if(arr.length===0){
     setAuthToken(true)
+    setLoginDetails(signinObj)
    navigate("/dashboard")
   }
 }
